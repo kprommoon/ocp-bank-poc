@@ -10,6 +10,7 @@ import { Label } from '../ui/label';
 import { Alert, AlertDescription } from '../ui/alert';
 import { SoilAnalysisRequest, CropType } from '../../types/analysis';
 import { supabase } from '../../services/supabase';
+import { useNavigate } from 'react-router-dom';
 
 const cropTypes: CropType[] = ['corn', 'wheat', 'soybeans', 'cotton', 'rice'];
 
@@ -30,6 +31,7 @@ const SoilAnalysisForm = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = React.useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -44,13 +46,11 @@ const SoilAnalysisForm = () => {
   const onSubmit = async (data: SoilAnalysisRequest) => {
     setIsSubmitting(true);
     setSubmitError(null);
-    console.log(data);
     try {
       const { error } = await supabase
         .from('soil_analysis_requests')
         .insert([
           {
-            // ...data,
             crop_type: data.cropType,
             email: data.email,
             address: data.farmAddress,
@@ -66,8 +66,8 @@ const SoilAnalysisForm = () => {
 
       if (error) throw error;
 
-      setSubmitSuccess(true);
-      reset();
+      // Navigate to confirmation page with form data
+      navigate('/analysis-confirmation', { state: { formData: data } });
     } catch (error) {
       setSubmitError('Failed to submit request. Please try again.');
       console.error('Submission error:', error);
