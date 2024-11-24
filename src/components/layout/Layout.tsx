@@ -16,60 +16,56 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
-  <div className="min-h-screen flex flex-col">
-    {/* Header */}
-    <header className="fixed top-0 w-full bg-white shadow-sm z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-8">
-            <div className="w-32">
-              <img 
-                src="https://www.ocpgroup.ma/themes/custom/ocp_child/img/logo.svg" 
-                alt="OCP Logo" 
-                className="h-12"
-              />
-            </div>
-            <div className="flex items-center space-x-2 text-gray-600">
-              <Phone className="h-4 w-4" />
-              <span>+66 2 123 4567</span>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-6">
-            <button className="bg-ocp text-white px-8 py-2.5 rounded-full hover:bg-ocp-dark transition-colors">
-              Customize Now
-            </button>
-          </div>
-
-          <div className="flex items-center space-x-8">
-            <div className="flex space-x-4">
-              <Facebook className="h-5 w-5 text-gray-600 hover:text-ocp cursor-pointer" />
-              <div className="text-gray-600 hover:text-ocp cursor-pointer">
-                <LineIcon />
+  <div className="overflow-y-scroll scrollbar-gutter-stable">
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="sticky top-0 w-full bg-white shadow-sm z-50">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-8">
+              <div className="w-32">
+                <img 
+                  src="https://www.ocpgroup.ma/themes/custom/ocp_child/img/logo.svg" 
+                  alt="OCP Logo" 
+                  className="h-12"
+                />
+              </div>
+              <div className="flex items-center space-x-2 text-gray-600">
+                <Phone className="h-4 w-4" />
+                <span>+66 2 123 4567</span>
               </div>
             </div>
-            <nav className="flex space-x-6">
-              <a href="#" className="text-gray-600 hover:text-ocp">Who we are</a>
-              <a href="#" className="text-gray-600 hover:text-ocp">Contact Us</a>
-            </nav>
+
+            <div className="flex items-center space-x-8">
+              <div className="flex space-x-4">
+                <Facebook className="h-5 w-5 text-gray-600 hover:text-ocp cursor-pointer" />
+                <div className="text-gray-600 hover:text-ocp cursor-pointer">
+                  <LineIcon />
+                </div>
+              </div>
+              <nav className="flex space-x-6">
+                <a href="#" className="text-gray-600 hover:text-ocp">Who we are</a>
+                <a href="#" className="text-gray-600 hover:text-ocp">Contact Us</a>
+              </nav>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    {/* Main Content */}
-    <main className="flex-grow">
-      {children}
-    </main>
+      {/* Main Content */}
+      <main className="flex-grow">
+        {children}
+      </main>
 
-    {/* Footer */}
-    <footer className="bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center text-gray-600 text-sm">
-          © 2024 OCP Group. All rights reserved.
+      {/* Footer */}
+      <footer className="bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center text-gray-600 text-sm">
+            © 2024 OCP Group. All rights reserved.
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </div>
 );
 

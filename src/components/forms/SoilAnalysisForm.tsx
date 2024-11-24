@@ -70,7 +70,7 @@ const SoilAnalysisForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
+    <Card className="w-full max-w-2xl mx-auto overflow-visible">
       <CardHeader>
         <CardTitle>Request Soil Analysis</CardTitle>
       </CardHeader>
