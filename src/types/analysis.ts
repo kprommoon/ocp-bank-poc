@@ -13,14 +13,16 @@ export interface SoilAnalysisRequest {
   createdAt: Date;
 }
 
-export interface FormError {
-  type: string;
-  message: string;
-}
-
-// Supabase specific types
-export type SoilAnalysisRow = Omit<SoilAnalysisRequest, 'preferredSamplingDate' | 'createdAt'> & {
-  preferred_sampling_date: string;
-  created_at: string;
+export interface SoilAnalysisRow {
   id: string;
+  crop_type: CropType;
+  farmer_name: string;
+  farm_address: string;
+  phone_number: string;
+  email: string;
+  acreage: number;
+  preferred_sampling_date: string;
+  notes?: string;
+  status: 'pending' | 'scheduled' | 'completed';
+  created_at: string;
 }

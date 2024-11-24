@@ -1,15 +1,15 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolve';
-import { z } from 'zod';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { SoilAnalysisRequest, CropType } from '@/types/analysis';
-import { supabase } from '@/services/supabase';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Label } from '../ui/label';
+import { Alert, AlertDescription } from '../ui/alert';
+import { SoilAnalysisRequest, CropType } from '../../types/analysis';
+import { supabase } from '../../services/supabase';
 
 const cropTypes: CropType[] = ['corn', 'wheat', 'soybeans', 'cotton', 'rice'];
 
@@ -33,6 +33,7 @@ const SoilAnalysisForm = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -75,24 +76,30 @@ const SoilAnalysisForm = () => {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-2">
+        <div className="space-y-2">
             <Label htmlFor="cropType">Crop Type</Label>
-            <Select onValueChange={(value) => register('cropType').onChange(value)}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select crop type" />
-              </SelectTrigger>
-              <SelectContent>
-                {cropTypes.map((crop) => (
-                  <SelectItem key={crop} value={crop}>
-                    {crop.charAt(0).toUpperCase() + crop.slice(1)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Controller
+                name="cropType"
+                control={control}
+                render={({ field }) => (
+                <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger>
+                    <SelectValue placeholder="Select crop type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                    {cropTypes.map((crop) => (
+                        <SelectItem key={crop} value={crop}>
+                        {crop.charAt(0).toUpperCase() + crop.slice(1)}
+                        </SelectItem>
+                    ))}
+                    </SelectContent>
+                </Select>
+                )}
+            />
             {errors.cropType && (
-              <p className="text-sm text-red-500">{errors.cropType.message}</p>
+                <p className="text-sm text-red-500">{errors.cropType.message}</p>
             )}
-          </div>
+            </div>
 
           <div className="space-y-2">
             <Label htmlFor="farmerName">Full Name</Label>
@@ -177,7 +184,8 @@ const SoilAnalysisForm = () => {
           </div>
 
           {submitError && (
-            <Alert variant="destructive">
+            // <Alert variant="destructive">
+            <Alert>
               <AlertDescription>{submitError}</AlertDescription>
             </Alert>
           )}

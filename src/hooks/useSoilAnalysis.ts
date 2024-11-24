@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { SoilAnalysisRequest } from '@/types/analysis';
-import { SoilAnalysisService, setupRequestSubscription } from '@/services/supabase';
+import { SoilAnalysisRequest } from '../types/analysis'
+import { SoilAnalysisService, setupRequestSubscription } from '../services/supabase'
 
 export function useSoilAnalysis(email?: string) {
   const [requests, setRequests] = useState<(SoilAnalysisRequest & { id: string })[]>([]);
