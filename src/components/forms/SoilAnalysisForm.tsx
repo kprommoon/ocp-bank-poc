@@ -44,15 +44,22 @@ const SoilAnalysisForm = () => {
   const onSubmit = async (data: SoilAnalysisRequest) => {
     setIsSubmitting(true);
     setSubmitError(null);
-
+    console.log(data);
     try {
       const { error } = await supabase
         .from('soil_analysis_requests')
         .insert([
           {
-            ...data,
+            // ...data,
+            crop_type: data.cropType,
+            email: data.email,
+            address: data.farmAddress,
+            farmer_name: data.farmerName,
+            phone: data.phoneNumber,
             status: 'pending',
-            preferred_sampling_date: data.preferredSamplingDate.toISOString(),
+            acreage: data.acreage,
+            notes: data.notes,
+            preferred_date: data.preferredSamplingDate.toISOString(),
             created_at: new Date().toISOString(),
           },
         ]);
@@ -105,7 +112,7 @@ const SoilAnalysisForm = () => {
             <Label htmlFor="farmerName">Full Name</Label>
             <Input
               {...register('farmerName')}
-              placeholder="John Doe"
+              placeholder="John Doe" defaultValue="Bank" 
             />
             {errors.farmerName && (
               <p className="text-sm text-red-500">{errors.farmerName.message}</p>
@@ -116,7 +123,7 @@ const SoilAnalysisForm = () => {
             <Label htmlFor="farmAddress">Farm Address</Label>
             <Input
               {...register('farmAddress')}
-              placeholder="1234 Farm Road, City, State, ZIP"
+              placeholder="1234 Farm Road, City, State, ZIP" defaultValue="Asgrad" 
             />
             {errors.farmAddress && (
               <p className="text-sm text-red-500">{errors.farmAddress.message}</p>
@@ -128,7 +135,7 @@ const SoilAnalysisForm = () => {
               <Label htmlFor="phoneNumber">Phone Number</Label>
               <Input
                 {...register('phoneNumber')}
-                placeholder="+1234567890"
+                placeholder="+1234567890" defaultValue="+66981519392" 
               />
               {errors.phoneNumber && (
                 <p className="text-sm text-red-500">{errors.phoneNumber.message}</p>
@@ -140,7 +147,7 @@ const SoilAnalysisForm = () => {
               <Input
                 {...register('email')}
                 type="email"
-                placeholder="farmer@example.com"
+                placeholder="farmer@example.com" defaultValue="bankp@hotmail.com" 
               />
               {errors.email && (
                 <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -155,7 +162,7 @@ const SoilAnalysisForm = () => {
                 {...register('acreage', { valueAsNumber: true })}
                 type="number"
                 min="1"
-                placeholder="100"
+                placeholder="100" defaultValue="1" 
               />
               {errors.acreage && (
                 <p className="text-sm text-red-500">{errors.acreage.message}</p>
