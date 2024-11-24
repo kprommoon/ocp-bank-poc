@@ -1,10 +1,11 @@
-import SupabaseTest from './components/SupabaseTest'
+// import SupabaseTest from './components/SupabaseTest'
+import SoilAnalysisForm from './components/forms/SoilAnalysisForm'
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md">
-        <SupabaseTest />
+        <SoilAnalysisForm />
       </div>
     </div>
   )

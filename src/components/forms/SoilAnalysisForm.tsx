@@ -202,3 +202,5 @@ const SoilAnalysisForm = () => {
     </Card>
   );
 };
+
+export default SoilAnalysisForm;
