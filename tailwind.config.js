@@ -18,6 +18,12 @@ export default {
     },
     extend: {
       colors: {
+        // OCP Colors
+        'ocp': {
+          DEFAULT: '#33a02c',  // Main green color
+          dark: '#2b8a25',     // Darker shade for hover states
+        },
+        // Existing Colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
