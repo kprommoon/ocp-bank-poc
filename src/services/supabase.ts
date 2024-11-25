@@ -1,4 +1,3 @@
-
 import { createClient } from '@supabase/supabase-js';
 import { SoilAnalysisRequest } from '../types/analysis';
 
@@ -29,7 +28,6 @@ export class SoilAnalysisService {
       .single();
 
     if (error) {
-      console.log('whatwhat');
       console.error('Error creating soil analysis request:', error);
       throw new Error('Failed to create soil analysis request');
     }
@@ -37,6 +35,33 @@ export class SoilAnalysisService {
     return SoilAnalysisService.transformRowToRequest(data);
   }
 
+  // Send email confirmation using Supabase Edge Function
+  static async sendEmailConfirmation(request: Omit<SoilAnalysisRequest, 'status' | 'createdAt'>) {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-confirmation-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+          },
+          body: JSON.stringify(request),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send confirmation email');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Error sending confirmation email:', error);
+      throw error;
+    }
+  }
+  
   // Get all requests for a specific email
   static async getRequestsByEmail(email: string) {
     const { data, error } = await supabase

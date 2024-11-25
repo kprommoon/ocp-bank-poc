@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Label } from '../ui/label';
 import { Alert, AlertDescription } from '../ui/alert';
 import { SoilAnalysisRequest, CropType } from '../../types/analysis';
-import { supabase } from '../../services/supabase';
+import { supabase, SoilAnalysisService } from '../../services/supabase';
 import { useNavigate } from 'react-router-dom';
 
 const cropTypes: CropType[] = ['corn', 'wheat', 'soybeans', 'cotton', 'rice'];
@@ -64,6 +64,9 @@ const SoilAnalysisForm = () => {
         ]);
 
       if (error) throw error;
+      
+      // Send confirmation email using Edge Function
+      await SoilAnalysisService.sendEmailConfirmation(data);
 
       // Navigate to confirmation page with form data
       navigate('/analysis-confirmation', { state: { formData: data } });
