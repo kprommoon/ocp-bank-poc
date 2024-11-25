@@ -30,7 +30,7 @@ const formSchema = z.object({
 const SoilAnalysisForm = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = React.useState(false);
+  const [submitSuccess] = React.useState(false);
   const navigate = useNavigate();
 
   const {
@@ -38,7 +38,6 @@ const SoilAnalysisForm = () => {
     control,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<SoilAnalysisRequest>({
     resolver: zodResolver(formSchema),
   });

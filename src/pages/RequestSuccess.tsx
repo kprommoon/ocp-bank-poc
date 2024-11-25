@@ -18,7 +18,7 @@ const AnalysisConfirmation = () => {
 
   if (!formData) return null;
 
-  const formatDate = (date) => {
+  const formatDate = (date: any) => {
     return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',

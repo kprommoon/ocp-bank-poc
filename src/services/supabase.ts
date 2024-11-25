@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import { SoilAnalysisRequest, SoilAnalysisRow } from '../types/analysis';
+import { SoilAnalysisRequest } from '../types/analysis';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
