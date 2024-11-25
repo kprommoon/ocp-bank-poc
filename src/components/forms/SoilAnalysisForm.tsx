@@ -114,7 +114,7 @@ const SoilAnalysisForm = () => {
             <Label htmlFor="farmerName">Full Name</Label>
             <Input
               {...register('farmerName')}
-              placeholder="John Doe" defaultValue="Bank" 
+              placeholder="John Doe"
             />
             {errors.farmerName && (
               <p className="text-sm text-red-500">{errors.farmerName.message}</p>
@@ -125,7 +125,7 @@ const SoilAnalysisForm = () => {
             <Label htmlFor="farmAddress">Farm Address</Label>
             <Input
               {...register('farmAddress')}
-              placeholder="1234 Farm Road, City, State, ZIP" defaultValue="Asgrad" 
+              placeholder="1234 Farm Road, City, State, ZIP"
             />
             {errors.farmAddress && (
               <p className="text-sm text-red-500">{errors.farmAddress.message}</p>
@@ -137,7 +137,7 @@ const SoilAnalysisForm = () => {
               <Label htmlFor="phoneNumber">Phone Number</Label>
               <Input
                 {...register('phoneNumber')}
-                placeholder="+1234567890" defaultValue="+66981519392" 
+                placeholder="+1234567890"
               />
               {errors.phoneNumber && (
                 <p className="text-sm text-red-500">{errors.phoneNumber.message}</p>
@@ -149,7 +149,7 @@ const SoilAnalysisForm = () => {
               <Input
                 {...register('email')}
                 type="email"
-                placeholder="farmer@example.com" defaultValue="bankp@hotmail.com" 
+                placeholder="farmer@example.com"
               />
               {errors.email && (
                 <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -164,7 +164,7 @@ const SoilAnalysisForm = () => {
                 {...register('acreage', { valueAsNumber: true })}
                 type="number"
                 min="1"
-                placeholder="100" defaultValue="1" 
+                placeholder="100"
               />
               {errors.acreage && (
                 <p className="text-sm text-red-500">{errors.acreage.message}</p>
